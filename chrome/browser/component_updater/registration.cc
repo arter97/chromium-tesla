@@ -114,10 +114,6 @@ void RegisterComponentsForUpdate() {
   RegisterMediaFoundationWidevineCdmComponent(cus);
 #endif
 
-#if BUILDFLAG(ENABLE_WIDEVINE_CDM_COMPONENT)
-  RegisterWidevineCdmComponent(cus);
-#endif  // BUILDFLAG(ENABLE_WIDEVINE_CDM_COMPONENT)
-
 #if BUILDFLAG(ENABLE_NACL) && !BUILDFLAG(IS_ANDROID)
 #if BUILDFLAG(IS_CHROMEOS)
   // PNaCl on Chrome OS is on rootfs and there is no need to download it. But
