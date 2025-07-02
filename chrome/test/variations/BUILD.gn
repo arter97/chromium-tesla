@@ -18,7 +18,6 @@ python_library("test_utils") {
 
   data = [ "//chrome/test/variations/test_utils/" ]
 
-  data_deps = [ "//third_party/catapult/third_party/gsutil:gsutil" ]
 }
 
 python_library("fixtures") {
