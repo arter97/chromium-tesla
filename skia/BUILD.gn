@@ -913,7 +913,7 @@ group("test_fonts_resources") {
   if (is_apple) {
     deps += [ ":test_fonts_bundle_data" ]
     data_deps += [ ":test_fonts_bundle_data" ]
-  } else {
+  } else if (false) {
     deps += [ "//third_party/test_fonts" ]
     data_deps += [ "//third_party/test_fonts" ]
   }
