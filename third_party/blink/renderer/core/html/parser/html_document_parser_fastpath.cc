@@ -46,7 +46,7 @@
 #include "third_party/blink/renderer/platform/wtf/text/wtf_uchar.h"
 
 #if defined(BLINK_ENABLE_VECTORIZED_HTML_SCANNING)
-#include "third_party/highway/src/hwy/highway.h"
+#include "hwy/highway.h"
 #define VECTORIZE_SCANNING 1
 #else
 #define VECTORIZE_SCANNING 0
