@@ -154,7 +154,7 @@ void AddInfoBarsIfNecessary(Browser* browser,
     infobars::ContentInfoBarManager* infobar_manager =
         infobars::ContentInfoBarManager::FromWebContents(web_contents);
 
-    if (!google_apis::HasAPIKeyConfigured()) {
+    if (false) {
       GoogleApiKeysInfoBarDelegate::Create(infobar_manager);
     }
 
