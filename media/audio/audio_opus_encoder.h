@@ -12,7 +12,7 @@
 #include "media/base/audio_converter.h"
 #include "media/base/audio_encoder.h"
 #include "media/base/audio_timestamp_helper.h"
-#include "third_party/opus/src/include/opus.h"
+#include <opus/opus.h>
 
 namespace media {
 
