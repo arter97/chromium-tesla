@@ -8,7 +8,7 @@ namespace content {
 
 BASE_FEATURE(kPrivacySandboxAggregationService,
              "PrivacySandboxAggregationService",
-             base::FEATURE_ENABLED_BY_DEFAULT);
+             base::FEATURE_DISABLED_BY_DEFAULT);
 
 const base::FeatureParam<std::string>
     kPrivacySandboxAggregationServiceTrustedServerUrlAwsParam{
