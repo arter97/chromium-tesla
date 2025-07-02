@@ -29,6 +29,7 @@
 
 #include <sync/sync.h>
 
+size_t strlcpy(char *dst, const char *src, size_t siz);
 
 struct sw_sync_create_fence_data {
   __u32 value;
