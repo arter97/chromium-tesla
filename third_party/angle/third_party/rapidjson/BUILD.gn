@@ -1,0 +1,11 @@
+config("rapidjson_config") {
+  include_dirs = [ "/usr/include/rapidjson" ]
+
+  # Enable std::string functionality.
+  defines = [ "RAPIDJSON_HAS_STDSTRING" ]
+}
+
+source_set("rapidjson") {
+  sources = [ "/usr/include/rapidjson/*.h" ]
+  public_configs = [ ":rapidjson_config" ]
+}
