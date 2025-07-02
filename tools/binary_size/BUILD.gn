@@ -22,7 +22,6 @@ python_library("sizes_py") {
   pydeps_file = "sizes.pydeps"
   data_deps = [
     "//build/util:test_results",
-    "//third_party/catapult/tracing:convert_chart_json",
   ]
 }
 

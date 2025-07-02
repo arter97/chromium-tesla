@@ -12530,8 +12530,6 @@ if (!is_android) {
       "//chrome/test/data/password/captured_sites/",
       "//chrome/test/data/web_page_replay_go_helper_scripts/automation_helper.js",
       "//components/test/data/autofill/web_page_replay_support_files/",
-      "//third_party/catapult/telemetry/telemetry/bin/",
-      "//third_party/catapult/web_page_replay_go/deterministic.js",
     ]
 
     if (is_linux || is_chromeos || is_win) {
@@ -12617,7 +12615,6 @@ if (!is_android) {
     deps = [ "//tools/perf/chrome_telemetry_build:telemetry_chrome_test" ]
 
     data = [
-      "//third_party/catapult/telemetry/telemetry/internal/bin/",
       "//tools/perf/run_telemetry_tests",
       "//testing/scripts/run_telemetry_as_googletest.py",
     ]

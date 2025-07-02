@@ -57,7 +57,6 @@ group("metrics_python_tests") {
     # The run_isolated_script_test.py script and its dependencies.
     "//testing/scripts/run_isolated_script_test.py",
     "//testing/scripts/common.py",
-    "//third_party/catapult/third_party/typ/",
 
     # Scripts we depend on. Their unit tests are also included.
     "//tools/json_comment_eater/json_comment_eater.py",

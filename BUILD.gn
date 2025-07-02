@@ -246,7 +246,6 @@ group("gn_all") {
     if (!is_ios) {
       deps += [
         "//google_apis/gcm:mcs_probe",
-        "//third_party/catapult/telemetry:bitmaptools($host_toolchain)",
       ]
       if (!is_android) {
         if (!is_castos && !is_fuchsia) {
@@ -1173,7 +1172,6 @@ if (use_blink && !is_cronet_build) {
       "//third_party/blink/public:blink_devtools_inspector_resources",
       "//third_party/blink/public/mojom:mojom_platform_js_data_deps",
       "//third_party/blink/renderer/core:gen_files_for_web_tests",
-      "//third_party/catapult/third_party/typ",
       "//third_party/hyphenation-patterns:test_data",
       "//third_party/mesa_headers",
       "//tools/imagediff",
@@ -1613,10 +1611,6 @@ if (use_blink && !is_cronet_build) {
       "//third_party/blink/web_tests/VirtualTestSuites",
       "//third_party/blink/web_tests/W3CImportExpectations",
       "//third_party/blink/web_tests/paint/invalidation/repaint-overlay/",
-      "//third_party/catapult/common/py_utils/",
-      "//third_party/catapult/devil/",
-      "//third_party/catapult/dependency_manager/",
-      "//third_party/catapult/third_party/typ/",
       "//third_party/depot_tools/pylint-2.7",
       "//third_party/depot_tools/pylint_main.py",
       "//third_party/depot_tools/pylintrc",

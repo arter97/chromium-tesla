@@ -573,13 +573,6 @@ repack("pak") {
     sources += [ "$root_gen_dir/content/webxr_internals_resources.pak" ]
   }
 
-  if (!is_android && !is_ios) {
-    deps += [ "//content/browser/tracing:resources" ]
-    sources += [
-      "$root_gen_dir/content/browser/tracing/tracing_resources.pak",
-      "$root_gen_dir/content/traces_internals_resources.pak",
-    ]
-  }
 
   if (is_ios) {
     sources += [

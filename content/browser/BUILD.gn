@@ -3350,7 +3350,6 @@ source_set("browser") {
       "//components/speech:speech",
       "//components/vector_icons",
       "//components/webauthn/json",
-      "//content/browser/tracing:resources",
       "//media/mojo/mojom:speech_recognition",
       "//ui/base",
     ]
