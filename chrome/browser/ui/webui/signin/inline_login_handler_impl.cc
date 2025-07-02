@@ -400,17 +400,6 @@ void InlineSigninHelper::OnClientOAuthSuccessAndBrowserOpened(
         signin_metrics::SourceForRefreshTokenOperation::
             kInlineLoginHandler_Signin);
   } else {
-    if (confirm_untrusted_signin_) {
-      // Display a confirmation dialog to the user.
-      base::RecordAction(
-          base::UserMetricsAction("Signin_Show_UntrustedSigninPrompt"));
-      Browser* browser = chrome::FindLastActiveWithProfile(profile_);
-      browser->window()->ShowOneClickSigninConfirmation(
-          base::UTF8ToUTF16(email_),
-          base::BindOnce(&InlineSigninHelper::UntrustedSigninConfirmed,
-                         base::Unretained(this), result.refresh_token));
-      return;
-    }
     CreateSyncStarter(result.refresh_token);
   }
 

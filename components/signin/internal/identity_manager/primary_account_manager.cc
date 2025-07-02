@@ -245,7 +245,7 @@ void PrimaryAccountManager::RegisterProfilePrefs(PrefRegistrySimple* registry) {
       prefs::kGoogleServicesSyncingGaiaIdMigratedToSignedIn, std::string());
   registry->RegisterStringPref(
       prefs::kGoogleServicesSyncingUsernameMigratedToSignedIn, std::string());
-  registry->RegisterBooleanPref(prefs::kSigninAllowed, true);
+  registry->RegisterBooleanPref(prefs::kSigninAllowed, false);
   registry->RegisterBooleanPref(prefs::kSignedInWithCredentialProvider, false);
   registry->RegisterBooleanPref(kExplicitBrowserSigninWithoutFeatureEnabled,
                                 false);
