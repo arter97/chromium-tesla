@@ -1,0 +1,61 @@
+// Copyright 2022 The ChromiumOS Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+syntax = "proto3";
+
+option optimize_for = LITE_RUNTIME;
+
+package spaced;
+
+// Output parameters for SetProjectId().
+message SetProjectIdReply {
+  // Set to true if ioctl syscall for setting the project inheritance flag
+  // succeeds.
+  bool success = 1;
+
+  // Errno if success == false.
+  int32 error = 2;
+}
+
+// Output parameters for SetProjectInheritanceFlag().
+message SetProjectInheritanceFlagReply {
+  // Set to true if ioctl syscall for setting the project id succeeds.
+  bool success = 1;
+
+  // Errno if success == false.
+  int32 error = 2;
+}
+
+enum StatefulDiskSpaceState {
+  // No value was set.
+  NONE = 0;
+  // No action is taken in this state.
+  NORMAL = 1;
+  // Prepare applications for impending critical disk space state.
+  LOW = 2;
+  // Critical disk space state.
+  CRITICAL = 3;
+}
+
+message StatefulDiskSpaceUpdate {
+  StatefulDiskSpaceState state = 1;
+  int64 free_space_bytes = 2;
+}
+
+// Input parameters for GetQuotaCurrentSpacesForIds().
+message GetQuotaCurrentSpacesForIdsRequest {
+  string path = 1;
+  repeated uint32 uids = 2 [packed = true];
+  repeated uint32 gids = 3 [packed = true];
+  repeated uint32 project_ids = 4 [packed = true];
+}
+
+// Output parameters for GetQuotaCurrentSpacesForIds().
+message GetQuotaCurrentSpacesForIdsReply {
+  // Maps from IDs to their current disk space usages.
+  // The Value is set to -1 if quotactl fails for the ID.
+  map<uint32, int64> curspaces_for_uids = 1;
+  map<uint32, int64> curspaces_for_gids = 2;
+  map<uint32, int64> curspaces_for_project_ids = 3;
+}

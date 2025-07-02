@@ -1,0 +1,38 @@
+SKIP: FAILED
+
+../../src/tint/lang/msl/writer/printer/printer.cc:500 internal compiler error: g = struct @align(16) {
+  a:vec3<u32> @offset(0)
+}
+
+h = struct @align(4) {
+  a:u32 @offset(0)
+}
+
+$B1: {  # root
+  %i:ptr<uniform, g, read> = var @binding_point(0, 0)
+  %j:ptr<storage, h, read_write> = var @binding_point(0, 1)
+}
+
+%tint_symbol = @compute @workgroup_size(1, 1, 1) func():void {
+  $B2: {
+    %4:ptr<uniform, vec3<u32>, read> = access %i, 0u
+    %5:vec3<u32> = load %4
+    %6:ptr<uniform, vec3<u32>, read> = access %i, 0u
+    %7:vec3<u32> = load %6
+    %8:u32 = dot %5, %7
+    %l:u32 = let %8
+    %10:ptr<storage, u32, read_write> = access %j, 0u
+    %11:ptr<uniform, vec3<u32>, read> = access %i, 0u
+    %12:u32 = load_vector_element %11, 0u
+    store %10, %12
+    ret
+  }
+}
+
+unhandled variable address space
+********************************************************************
+*  The tint shader compiler has encountered an unexpected error.   *
+*                                                                  *
+*  Please help us fix this issue by submitting a bug report at     *
+*  crbug.com/tint with the source program that triggered the bug.  *
+********************************************************************

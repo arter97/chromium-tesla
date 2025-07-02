@@ -1,0 +1,68 @@
+# Copyright 2020 The Chromium Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("../../scripts/build/ninja/copy.gni")
+import("../../third_party/typescript/typescript.gni")
+
+group("e2e") {
+  deps = [
+    ":config",
+    ":test_inputs",
+    ":tests",
+    "resources",
+  ]
+}
+
+node_ts_library("tests") {
+  deps = [
+    "animations",
+    "application",
+    "assertion",
+    "changes",
+    "console",
+    "coverage",
+    "cross_tool_integration",
+    "css_overview",
+    "elements",
+    "emulation",
+    "extensions",
+    "host",
+    "inline_editor",
+    "issues",
+    "layers",
+    "lighthouse",
+    "media",
+    "memory",
+    "network",
+    "performance",
+    "puppeteer",
+    "quick_open",
+    "recorder",
+    "rendering",
+    "search",
+    "security",
+    "sensors",
+    "settings",
+    "snippets",
+    "sources",
+    "targets",
+    "webaudio",
+  ]
+  sources = [ "mocharc.ts" ]
+}
+
+copy_to_gen("config") {
+  sources = [
+    ".mocharc.js",
+    "test-runner-config.json",
+  ]
+}
+
+generated_file("test_inputs") {
+  outputs = [ "$target_gen_dir/tests.txt" ]
+  data_keys = [ "tests" ]
+  rebase = target_gen_dir
+
+  deps = [ ":tests" ]
+}

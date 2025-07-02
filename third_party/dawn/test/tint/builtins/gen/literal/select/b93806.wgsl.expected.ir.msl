@@ -1,0 +1,22 @@
+#include <metal_stdlib>
+using namespace metal;
+struct vertex_main_outputs {
+  float4 tint_symbol [[position]];
+};
+
+void select_b93806() {
+  int3 res = int3(1);
+}
+float4 vertex_main_inner() {
+  select_b93806();
+  return float4(0.0f);
+}
+fragment void fragment_main() {
+  select_b93806();
+}
+kernel void compute_main() {
+  select_b93806();
+}
+vertex vertex_main_outputs vertex_main() {
+  return vertex_main_outputs{.tint_symbol=vertex_main_inner()};
+}

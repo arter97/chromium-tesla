@@ -1,0 +1,77 @@
+SKIP: FAILED
+
+../../src/tint/lang/msl/writer/printer/printer.cc:500 internal compiler error: Constants = struct @align(4) {
+  level:i32 @offset(0)
+}
+
+Result = struct @align(4) {
+  values:array<f32> @offset(0)
+}
+
+$B1: {  # root
+  %constants:ptr<uniform, Constants, read> = var @binding_point(0, 0)
+  %myTexture:ptr<handle, texture_2d_array<f32>, read> = var @binding_point(0, 1)
+  %result:ptr<storage, Result, read_write> = var @binding_point(0, 3)
+}
+
+%tint_symbol = @compute @workgroup_size(1, 1, 1) func(%GlobalInvocationID:vec3<u32> [@global_invocation_id]):void {
+  $B2: {
+    %6:u32 = access %GlobalInvocationID, 2u
+    %7:u32 = mul 4u, %6
+    %8:u32 = access %GlobalInvocationID, 1u
+    %9:u32 = mul 2u, %8
+    %10:u32 = add %7, %9
+    %11:u32 = access %GlobalInvocationID, 0u
+    %12:u32 = add %10, %11
+    %flatIndex:ptr<function, u32, read_write> = var, %12
+    %14:u32 = load %flatIndex
+    %15:u32 = mul %14, 1u
+    store %flatIndex, %15
+    %16:texture_2d_array<f32> = load %myTexture
+    %17:texture_2d_array<f32> = let %16
+    %18:vec2<u32> = swizzle %GlobalInvocationID, xy
+    %19:vec2<i32> = convert %18
+    %20:vec4<f32> = textureLoad %17, %19, 0i, 0i
+    %texel:ptr<function, vec4<f32>, read_write> = var, %20
+    loop [i: $B3, b: $B4, c: $B5] {  # loop_1
+      $B3: {  # initializer
+        %i:ptr<function, u32, read_write> = var, 0u
+        next_iteration  # -> $B4
+      }
+      $B4: {  # body
+        %23:u32 = load %i
+        %24:bool = lt %23, 1u
+        if %24 [t: $B6, f: $B7] {  # if_1
+          $B6: {  # true
+            exit_if  # if_1
+          }
+          $B7: {  # false
+            exit_loop  # loop_1
+          }
+        }
+        %25:u32 = load %flatIndex
+        %26:u32 = load %i
+        %27:u32 = add %25, %26
+        %28:ptr<storage, f32, read_write> = access %result, 0u, %27
+        %29:f32 = load_vector_element %texel, 0u
+        store %28, %29
+        continue  # -> $B5
+      }
+      $B5: {  # continuing
+        %30:u32 = load %i
+        %31:u32 = add %30, 1u
+        store %i, %31
+        next_iteration  # -> $B4
+      }
+    }
+    ret
+  }
+}
+
+unhandled variable address space
+********************************************************************
+*  The tint shader compiler has encountered an unexpected error.   *
+*                                                                  *
+*  Please help us fix this issue by submitting a bug report at     *
+*  crbug.com/tint with the source program that triggered the bug.  *
+********************************************************************

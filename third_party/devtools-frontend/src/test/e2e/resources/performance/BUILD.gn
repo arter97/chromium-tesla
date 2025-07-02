@@ -1,0 +1,18 @@
+# Copyright 2020 The Chromium Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("../../../../scripts/build/ninja/copy.gni")
+
+copy_to_gen("performance") {
+  sources = [
+    "fake-website.html",
+    "selectorStats/page-with-style-perf-test.html",
+    "selectorStats/page-with-style.css",
+    "selectorStats/page-with-style.html",
+    "timeline/treeView-test-trace.json",
+    "wasm/mainWasm_profile.json",
+    "wasm/profiling.html",
+    "wasm/profiling.wasm",
+  ]
+}

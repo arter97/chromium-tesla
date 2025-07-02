@@ -1,0 +1,17 @@
+#include <metal_stdlib>
+
+using namespace metal;
+float tint_fwidth_fine(float v) {
+  return (fabs(dfdx(v)) + fabs(dfdy(v)));
+}
+
+void fwidthFine_f1742d(device float* const tint_symbol) {
+  float res = tint_fwidth_fine(1.0f);
+  *(tint_symbol) = res;
+}
+
+fragment void fragment_main(device float* tint_symbol_1 [[buffer(0)]]) {
+  fwidthFine_f1742d(tint_symbol_1);
+  return;
+}
+

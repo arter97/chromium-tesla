@@ -1,0 +1,26 @@
+#include <metal_stdlib>
+using namespace metal;
+struct modf_result_vec3_f16 {
+  half3 fract;
+  half3 whole;
+};
+struct vertex_main_outputs {
+  float4 tint_symbol [[position]];
+};
+
+void modf_45005f() {
+  modf_result_vec3_f16 res = modf_result_vec3_f16{.fract=half3(-0.5h), .whole=half3(-1.0h)};
+}
+float4 vertex_main_inner() {
+  modf_45005f();
+  return float4(0.0f);
+}
+fragment void fragment_main() {
+  modf_45005f();
+}
+kernel void compute_main() {
+  modf_45005f();
+}
+vertex vertex_main_outputs vertex_main() {
+  return vertex_main_outputs{.tint_symbol=vertex_main_inner()};
+}

@@ -1,0 +1,22 @@
+#include <metal_stdlib>
+using namespace metal;
+struct vertex_main_outputs {
+  float4 tint_symbol [[position]];
+};
+
+void radians_bff231() {
+  float res = 0.01745329238474369049f;
+}
+float4 vertex_main_inner() {
+  radians_bff231();
+  return float4(0.0f);
+}
+fragment void fragment_main() {
+  radians_bff231();
+}
+kernel void compute_main() {
+  radians_bff231();
+}
+vertex vertex_main_outputs vertex_main() {
+  return vertex_main_outputs{.tint_symbol=vertex_main_inner()};
+}

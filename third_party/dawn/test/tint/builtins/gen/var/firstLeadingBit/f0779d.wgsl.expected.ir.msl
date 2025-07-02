@@ -1,0 +1,35 @@
+#include <metal_stdlib>
+using namespace metal;
+struct tint_module_vars_struct {
+  device uint* prevent_dce;
+};
+struct vertex_main_outputs {
+  float4 tint_symbol [[position]];
+};
+
+void firstLeadingBit_f0779d(tint_module_vars_struct tint_module_vars) {
+  uint arg_0 = 1u;
+  uint const v = arg_0;
+  uint const v_1 = select(16u, 0u, ((v & 4294901760u) == 0u));
+  uint const v_2 = select(8u, 0u, (((v >> v_1) & 65280u) == 0u));
+  uint const v_3 = select(4u, 0u, ((((v >> v_1) >> v_2) & 240u) == 0u));
+  uint const v_4 = select(2u, 0u, (((((v >> v_1) >> v_2) >> v_3) & 12u) == 0u));
+  uint res = select((v_1 | (v_2 | (v_3 | (v_4 | select(1u, 0u, ((((((v >> v_1) >> v_2) >> v_3) >> v_4) & 2u) == 0u)))))), 4294967295u, (((((v >> v_1) >> v_2) >> v_3) >> v_4) == 0u));
+  (*tint_module_vars.prevent_dce) = res;
+}
+float4 vertex_main_inner(tint_module_vars_struct tint_module_vars) {
+  firstLeadingBit_f0779d(tint_module_vars);
+  return float4(0.0f);
+}
+fragment void fragment_main(device uint* prevent_dce [[buffer(0)]]) {
+  tint_module_vars_struct const tint_module_vars = tint_module_vars_struct{.prevent_dce=prevent_dce};
+  firstLeadingBit_f0779d(tint_module_vars);
+}
+kernel void compute_main(device uint* prevent_dce [[buffer(0)]]) {
+  tint_module_vars_struct const tint_module_vars = tint_module_vars_struct{.prevent_dce=prevent_dce};
+  firstLeadingBit_f0779d(tint_module_vars);
+}
+vertex vertex_main_outputs vertex_main(device uint* prevent_dce [[buffer(0)]]) {
+  tint_module_vars_struct const tint_module_vars = tint_module_vars_struct{.prevent_dce=prevent_dce};
+  return vertex_main_outputs{.tint_symbol=vertex_main_inner(tint_module_vars)};
+}

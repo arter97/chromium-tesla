@@ -1,0 +1,83 @@
+// Copyright 2023 The Dawn & Tint Authors
+//
+// Redistribution and use in source and binary forms, with or without
+// modification, are permitted provided that the following conditions are met:
+//
+// 1. Redistributions of source code must retain the above copyright notice, this
+//    list of conditions and the following disclaimer.
+//
+// 2. Redistributions in binary form must reproduce the above copyright notice,
+//    this list of conditions and the following disclaimer in the documentation
+//    and/or other materials provided with the distribution.
+//
+// 3. Neither the name of the copyright holder nor the names of its
+//    contributors may be used to endorse or promote products derived from
+//    this software without specific prior written permission.
+//
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+// AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+// IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+// DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+// FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+// DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+// SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+// CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+// OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+////////////////////////////////////////////////////////////////////////////////
+// MSL builtin definition file                                                //
+//
+// After modifying this file, run:                                            //
+//    tools/run gen                                                           //
+// from the Dawn source directory.                                            //
+//                                                                            //
+// See docs/tint/intrinsic_definition_files.md for syntax                     //
+////////////////////////////////////////////////////////////////////////////////
+
+import "src/tint/lang/core/access.def"
+import "src/tint/lang/core/address_space.def"
+
+////////////////////////////////////////////////////////////////////////////////
+// Enum matchers                                                              //
+////////////////////////////////////////////////////////////////////////////////
+
+match read_write: access.read_write
+
+match function: address_space.function
+match workgroup_or_storage
+  : address_space.workgroup
+  | address_space.storage
+
+////////////////////////////////////////////////////////////////////////////////
+// Types                                                                      //
+////////////////////////////////////////////////////////////////////////////////
+
+type bool
+type i32
+type u32
+type atomic<T>
+type ptr<S: address_space, T, A: access>
+
+////////////////////////////////////////////////////////////////////////////////
+// Type matchers                                                              //
+////////////////////////////////////////////////////////////////////////////////
+
+match iu32: i32 | u32
+
+////////////////////////////////////////////////////////////////////////////////
+// Builtin Functions                                                          //
+////////////////////////////////////////////////////////////////////////////////
+@stage("fragment", "compute") fn atomic_compare_exchange_weak_explicit[T: iu32, S: workgroup_or_storage](ptr<S, atomic<T>, read_write>, ptr<function, T, read_write>, T, u32, u32) -> bool
+@stage("fragment", "compute") fn atomic_exchange_explicit[T: iu32, S: workgroup_or_storage](ptr<S, atomic<T>, read_write>, T, u32) -> T
+@stage("fragment", "compute") fn atomic_fetch_add_explicit[T: iu32, S: workgroup_or_storage](ptr<S, atomic<T>, read_write>, T, u32) -> T
+@stage("fragment", "compute") fn atomic_fetch_and_explicit[T: iu32, S: workgroup_or_storage](ptr<S, atomic<T>, read_write>, T, u32) -> T
+@stage("fragment", "compute") fn atomic_fetch_max_explicit[T: iu32, S: workgroup_or_storage](ptr<S, atomic<T>, read_write>, T, u32) -> T
+@stage("fragment", "compute") fn atomic_fetch_min_explicit[T: iu32, S: workgroup_or_storage](ptr<S, atomic<T>, read_write>, T, u32) -> T
+@stage("fragment", "compute") fn atomic_fetch_or_explicit[T: iu32, S: workgroup_or_storage](ptr<S, atomic<T>, read_write>, T, u32) -> T
+@stage("fragment", "compute") fn atomic_fetch_sub_explicit[T: iu32, S: workgroup_or_storage](ptr<S, atomic<T>, read_write>, T, u32) -> T
+@stage("fragment", "compute") fn atomic_fetch_xor_explicit[T: iu32, S: workgroup_or_storage](ptr<S, atomic<T>, read_write>, T, u32) -> T
+@stage("fragment", "compute") fn atomic_load_explicit[T: iu32, S: workgroup_or_storage](ptr<S, atomic<T>, read_write>, u32) -> T
+@stage("fragment", "compute") fn atomic_store_explicit[T: iu32, S: workgroup_or_storage](ptr<S, atomic<T>, read_write>, T, u32)
+@stage("compute") fn threadgroup_barrier(u32)
+

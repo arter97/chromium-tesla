@@ -1,0 +1,22 @@
+#include <metal_stdlib>
+using namespace metal;
+struct vertex_main_outputs {
+  float4 tint_symbol [[position]];
+};
+
+void dot_c11efe() {
+  int res = 3;
+}
+float4 vertex_main_inner() {
+  dot_c11efe();
+  return float4(0.0f);
+}
+fragment void fragment_main() {
+  dot_c11efe();
+}
+kernel void compute_main() {
+  dot_c11efe();
+}
+vertex vertex_main_outputs vertex_main() {
+  return vertex_main_outputs{.tint_symbol=vertex_main_inner()};
+}
