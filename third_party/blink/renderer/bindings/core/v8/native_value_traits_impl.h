@@ -587,6 +587,8 @@ struct CORE_EXPORT NativeValueTraits<DOMArrayBuffer>
                                        int argument_index,
                                        v8::Local<v8::Value> value,
                                        ExceptionState& exception_state);
+  static constexpr bool supports_scriptwrappable_specific_fast_array_iteration =
+      false;
 };
 
 template <>
