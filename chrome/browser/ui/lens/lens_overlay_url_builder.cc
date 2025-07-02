@@ -78,7 +78,7 @@ inline constexpr char kXSRFTokenQueryParamKey[] = "sxsrf";
 inline constexpr char kSecActQueryParamKey[] = "sec_act";
 
 // The list of query parameters to ignore when comparing search URLs.
-inline constexpr std::string kIgnoredSearchUrlQueryParameters[] = {
+inline const std::string kIgnoredSearchUrlQueryParameters[] = {
     kViewportWidthQueryParamKey, kViewportHeightQueryParamKey,
     kXSRFTokenQueryParamKey, kSecActQueryParamKey};
 

@@ -30,7 +30,7 @@ namespace {
 // The maximum idle time before the model executor is unloaded from memory.
 constexpr base::TimeDelta kMaxExecutorIdleSeconds = base::Seconds(60);
 // Constants for TFlite model validation.
-constexpr std::string kTestPrefix = "face";
+const std::string kTestPrefix = "face";
 constexpr std::string_view kModelValidationSwitchName =
     "omnibox-on-device-tail-model-validation";
 
