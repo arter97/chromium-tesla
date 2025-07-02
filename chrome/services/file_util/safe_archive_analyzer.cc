@@ -86,10 +86,10 @@ void SafeArchiveAnalyzer::AnalyzeRarFile(
                               weak_factory_.GetWeakPtr());
   timeout_timer_.Start(FROM_HERE, kArchiveAnalysisTimeout, this,
                        &SafeArchiveAnalyzer::Timeout);
-  rar_analyzer_.Analyze(std::move(rar_file), base::FilePath(),
-                        /*password=*/password,
-                        std::move(analysis_finished_callback),
-                        std::move(temp_file_getter_callback), &results_);
+  LOG(ERROR) << "AnalyzeRarFile is disabled in this build";
+  results_.success = false;
+  results_.analysis_result = safe_browsing::ArchiveAnalysisResult::kFailedToOpen;
+  std::move(callback_).Run(results_);
 }
 
 void SafeArchiveAnalyzer::AnalyzeSevenZipFile(

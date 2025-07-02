@@ -75,7 +75,10 @@ void FileAnalyzer::Start(const base::FilePath& target_path,
   if (inspection_type == DownloadFileType::ZIP) {
     StartExtractZipFeatures();
   } else if (inspection_type == DownloadFileType::RAR) {
-    StartExtractRarFeatures();
+    LOG(ERROR) << "Safebrowser checking of rar files is disabled, open at your own risk!";
+    results_.archive_summary.set_parser_status(
+        ClientDownloadRequest::ArchiveSummary::PARSER_TIMED_OUT);
+    std::move(callback_).Run(std::move(results_));
 #if BUILDFLAG(IS_MAC)
   } else if (inspection_type == DownloadFileType::DMG) {
     StartExtractDmgFeatures();
