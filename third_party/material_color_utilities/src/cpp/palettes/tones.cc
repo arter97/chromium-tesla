@@ -57,7 +57,7 @@ Argb TonalPalette::get(double tone) const {
 Hct TonalPalette::createKeyColor(double hue, double chroma) {
   double start_tone = 50.0;
   Hct smallest_delta_hct(hue, chroma, start_tone);
-  double smallest_delta = abs(smallest_delta_hct.get_chroma() - chroma);
+  double smallest_delta = std::abs(smallest_delta_hct.get_chroma() - chroma);
   // Starting from T50, check T+/-delta to see if they match the requested
   // chroma.
   //
@@ -73,13 +73,13 @@ Hct TonalPalette::createKeyColor(double hue, double chroma) {
       return smallest_delta_hct;
     }
     Hct hct_add(hue, chroma, start_tone + delta);
-    double hct_add_delta = abs(hct_add.get_chroma() - chroma);
+    double hct_add_delta = std::abs(hct_add.get_chroma() - chroma);
     if (hct_add_delta < smallest_delta) {
       smallest_delta = hct_add_delta;
       smallest_delta_hct = hct_add;
     }
     Hct hct_subtract(hue, chroma, start_tone - delta);
-    double hct_subtract_delta = abs(hct_subtract.get_chroma() - chroma);
+    double hct_subtract_delta = std::abs(hct_subtract.get_chroma() - chroma);
     if (hct_subtract_delta < smallest_delta) {
       smallest_delta = hct_subtract_delta;
       smallest_delta_hct = hct_subtract;
