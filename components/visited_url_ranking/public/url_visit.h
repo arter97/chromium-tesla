@@ -184,6 +184,7 @@ struct URLVisitAggregate {
 template <class... Ts>
 struct URLVisitVariantHelper : Ts... {
   using Ts::operator()...;
+  URLVisitVariantHelper(Ts&&... t) : Ts(t)... { }
 };
 
 }  // namespace visited_url_ranking
