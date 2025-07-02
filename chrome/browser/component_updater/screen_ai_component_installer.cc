@@ -124,8 +124,7 @@ void ScreenAIComponentInstallerPolicy::DeleteComponent() {
 void ManageScreenAIComponentRegistration(ComponentUpdateService* cus,
                                          PrefService* local_state) {
   if (screen_ai::ScreenAIInstallState::ShouldInstall(local_state)) {
-    RegisterScreenAIComponent(cus);
-    return;
+    // don't actually register the service - we don't want the binary blob
   }
 
   // Clean up.
