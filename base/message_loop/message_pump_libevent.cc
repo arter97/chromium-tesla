@@ -20,7 +20,7 @@
 #include "base/time/time.h"
 #include "base/trace_event/base_tracing.h"
 #include "build/build_config.h"
-#include "third_party/libevent/event.h"
+#include <event.h>
 
 #if BUILDFLAG(ENABLE_MESSAGE_PUMP_EPOLL)
 #include "base/message_loop/message_pump_epoll.h"

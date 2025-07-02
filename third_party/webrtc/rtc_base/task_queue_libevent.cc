@@ -36,7 +36,7 @@
 #include "rtc_base/synchronization/mutex.h"
 #include "rtc_base/thread_annotations.h"
 #include "rtc_base/time_utils.h"
-#include "third_party/libevent/event.h"
+#include <event.h>
 
 namespace webrtc {
 namespace {
