@@ -18,7 +18,7 @@ import sys
 
 
 SHIM_TEMPLATE = """
-#if defined(OFFICIAL_BUILD)
+#if defined(DONT_TELL_ME_WHAT_TO_DO_GOOGLE)
 #error shim headers must not be used in official builds!
 #endif
 """
