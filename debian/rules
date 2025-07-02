@@ -3,6 +3,9 @@
 # enable verbose build messages
 export DH_VERBOSE=1
 
+# disable -D_FORTIFY_SOURCE=3, Chromium does it by itself already
+export DEB_CPPFLAGS_MAINT_SET=
+
 # enable all build hardening flags
 export DEB_BUILD_MAINT_OPTIONS=hardening=+all
 
