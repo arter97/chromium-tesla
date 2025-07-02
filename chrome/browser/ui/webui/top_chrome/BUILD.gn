@@ -19,6 +19,7 @@ source_set("top_chrome") {
   deps = [
     "//base",
     "//chrome/browser/profiles:profile",
+    "//chrome/browser/ui:webui_name_variants",
     "//components/site_engagement/content:content",
     "//content/public/browser",
     "//ui/webui",
