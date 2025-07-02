@@ -185,7 +185,7 @@ declare_args() {
        ((angle_use_x11 && !is_chromeos) || angle_use_wayland || is_castos)) &&
       !is_fuchsia && !angle_is_winuwp && !is_ggp && !is_win_arm64
 
-  angle_enable_vulkan =
+  angle_enable_vulkan = false &&
       angle_has_build &&
       !(is_android && build_with_chromium && is_official_build) &&
       ((is_win && !angle_is_winuwp) ||

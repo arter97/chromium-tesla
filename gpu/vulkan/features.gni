@@ -13,5 +13,5 @@ declare_args() {
   # Enable swiftshader vulkan. Disabling it can save build time, however
   # --use-vulkan=swiftshader and some tests which use swiftshader vulkan will
   # not work.
-  enable_swiftshader_vulkan = true
+  enable_swiftshader_vulkan = false
 }
