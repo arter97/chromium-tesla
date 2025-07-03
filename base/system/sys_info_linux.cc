@@ -25,16 +25,12 @@
 
 namespace {
 
-uint64_t AmountOfMemory(int pages_name) {
-  long pages = sysconf(pages_name);
+uint64_t AmountOfPhysicalMemory() {
+  long pages = sysconf(_SC_PHYS_PAGES);
   long page_size = sysconf(_SC_PAGESIZE);
   if (pages < 0 || page_size < 0)
     return 0;
   return static_cast<uint64_t>(pages) * static_cast<uint64_t>(page_size);
-}
-
-uint64_t AmountOfPhysicalMemory() {
-  return AmountOfMemory(_SC_PHYS_PAGES);
 }
 
 base::LazyInstance<
