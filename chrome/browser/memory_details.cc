@@ -15,6 +15,7 @@
 #include "base/strings/string_util.h"
 #include "base/strings/stringprintf.h"
 #include "base/strings/utf_string_conversions.h"
+#include "base/system/sys_info.h"
 #include "base/task/thread_pool.h"
 #include "build/build_config.h"
 #include "chrome/browser/profiles/profile.h"
@@ -223,6 +224,12 @@ std::string MemoryDetails::ToLogString(bool include_tab_title) {
   std::string log;
   log.reserve(4096);
   ProcessMemoryInformationList processes = ChromeBrowser()->processes;
+  // Print physical memory amount
+  log += StringPrintf("Total system memory: %d MB\n", base::SysInfo::AmountOfPhysicalMemoryMB());
+  // Print whether device is low-end
+  log += StringPrintf("IsLowEndDevice: %c, IsLowEndDeviceOrPartialLowEndModeEnabled: %c\n",
+    base::SysInfo::IsLowEndDevice() ? 'Y' : 'N',
+    base::SysInfo::IsLowEndDeviceOrPartialLowEndModeEnabled() ? 'Y' : 'N');
   // Sort by memory consumption, low to high.
   std::sort(processes.begin(), processes.end());
   // Print from high to low.
