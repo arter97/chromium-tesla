@@ -60,6 +60,10 @@ bool IsDisableSiteIsolationForPolicyFlagPresent() {
 #endif
 
 bool IsSiteIsolationDisabled(SiteIsolationMode site_isolation_mode) {
+#if 1
+  // We are running a single tab only with constrained memory
+  return true;
+#else
   if (IsDisableSiteIsolationFlagPresent()) {
     return true;
   }
@@ -76,6 +80,7 @@ bool IsSiteIsolationDisabled(SiteIsolationMode site_isolation_mode) {
   return GetContentClient() &&
          GetContentClient()->browser()->ShouldDisableSiteIsolation(
              site_isolation_mode);
+#endif
 }
 
 }  // namespace
