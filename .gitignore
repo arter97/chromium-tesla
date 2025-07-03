@@ -323,3 +323,25 @@ third_party/rust/target/
 # These files are created by first class GCS deps.
 **/*_hash
 **/*_content_names
+
+# Build artifacts?
+build/config/freetype/freetype.gni
+base/third_party/double_conversion/BUILD.gn
+third_party/angle/src/third_party/libXNVCtrl/BUILD.gn
+third_party/dav1d/BUILD.gn
+third_party/flac/BUILD.gn
+third_party/fontconfig/BUILD.gn
+third_party/harfbuzz-ng/harfbuzz.gni
+third_party/highway/BUILD.gn
+third_party/libdrm/BUILD.gn
+third_party/libevent/BUILD.gn
+third_party/libjpeg.gni
+third_party/libpng/BUILD.gn
+third_party/libsecret/BUILD.gn
+third_party/libusb/BUILD.gn
+third_party/libxml/BUILD.gn
+third_party/libxslt/BUILD.gn
+third_party/openh264/BUILD.gn
+third_party/opus/BUILD.gn
+third_party/zlib/BUILD.gn
+third_party/zstd/BUILD.gn
