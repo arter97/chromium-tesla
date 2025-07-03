@@ -153,7 +153,7 @@ bool GetDiskSpaceInfo(const base::FilePath& path,
 namespace base {
 
 // static
-int SysInfo::NumberOfProcessors() {
+int SysInfo::NumberOfProcessorsImpl() {
   return win::OSInfo::GetInstance()->processors();
 }
 

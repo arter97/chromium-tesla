@@ -185,4 +185,7 @@ const char kPackageVersionName[] = "package-version-name";
 const char kSchedulerBoostUrgent[] = "scheduler-boost-urgent";
 #endif
 
+// Override base::SysInfo::NumberOfProcessors()
+const char kNumberOfProcessors[] = "number-of-processors";
+
 }  // namespace switches

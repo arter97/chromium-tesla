@@ -331,6 +331,7 @@ class BASE_EXPORT SysInfo {
   FRIEND_TEST_ALL_PREFIXES(debug::SystemMetricsTest, ParseMeminfo);
 
   static int NumberOfEfficientProcessorsImpl();
+  static int NumberOfProcessorsImpl();
   static uint64_t AmountOfPhysicalMemoryImpl();
   static uint64_t AmountOfAvailablePhysicalMemoryImpl();
   static bool IsLowEndDeviceImpl();

@@ -120,7 +120,7 @@ namespace base {
 
 #if !BUILDFLAG(IS_OPENBSD)
 // static
-int SysInfo::NumberOfProcessors() {
+int SysInfo::NumberOfProcessorsImpl() {
 #if BUILDFLAG(IS_MAC)
   std::optional<int> number_of_physical_cores =
       internal::NumberOfProcessorsWhenCpuSecurityMitigationEnabled();
@@ -283,7 +283,7 @@ int SysInfo::NumberOfEfficientProcessorsImpl() {
 #if BUILDFLAG(IS_LINUX) || BUILDFLAG(IS_CHROMEOS) || BUILDFLAG(IS_ANDROID)
   // Try to guess the CPU architecture and cores of each cluster by comparing
   // the maximum frequencies of the available (online and offline) cores.
-  int num_cpus = SysInfo::NumberOfProcessors();
+  int num_cpus = SysInfo::NumberOfProcessorsImpl();
   DCHECK_GE(num_cpus, 0);
   std::vector<uint32_t> max_core_frequencies_khz(static_cast<size_t>(num_cpus),
                                                  0);

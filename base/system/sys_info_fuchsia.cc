@@ -104,7 +104,7 @@ uint64_t SysInfo::AmountOfAvailablePhysicalMemoryImpl() {
 }
 
 // static
-int SysInfo::NumberOfProcessors() {
+int SysInfo::NumberOfProcessorsImpl() {
   return static_cast<int>(zx_system_get_num_cpus());
 }
 

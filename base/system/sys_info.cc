@@ -13,6 +13,7 @@
 #include "base/functional/callback.h"
 #include "base/location.h"
 #include "base/notreached.h"
+#include "base/strings/string_number_conversions.h"
 #include "base/system/sys_info_internal.h"
 #include "base/task/task_traits.h"
 #include "base/task/thread_pool.h"
@@ -34,8 +35,27 @@ std::optional<uint64_t> g_amount_of_physical_memory_mb_for_testing;
 
 // static
 int SysInfo::NumberOfEfficientProcessors() {
+  auto* command_line = base::CommandLine::ForCurrentProcess();
+  if (command_line->HasSwitch(switches::kNumberOfProcessors))
+    return 0;
+
   static int number_of_efficient_processors = NumberOfEfficientProcessorsImpl();
   return number_of_efficient_processors;
+}
+
+// static
+int SysInfo::NumberOfProcessors() {
+  auto* command_line = base::CommandLine::ForCurrentProcess();
+  if (command_line->HasSwitch(switches::kNumberOfProcessors)) {
+    int num_cpus = 0;
+
+    base::StringToInt(command_line->GetSwitchValueASCII(switches::kNumberOfProcessors),
+        &num_cpus);
+    if (num_cpus > 0)
+      return num_cpus;
+  }
+
+  return NumberOfProcessorsImpl();
 }
 
 // static

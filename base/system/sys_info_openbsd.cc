@@ -28,7 +28,7 @@ uint64_t AmountOfMemory(int pages_name) {
 namespace base {
 
 // static
-int SysInfo::NumberOfProcessors() {
+int SysInfo::NumberOfProcessorsImpl() {
   int mib[] = {CTL_HW, HW_NCPU};
   int ncpu;
   size_t size = sizeof(ncpu);
