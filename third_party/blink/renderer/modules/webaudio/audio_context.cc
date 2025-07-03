@@ -708,7 +708,8 @@ AutoplayPolicy::Type AudioContext::GetAutoplayPolicy() const {
   LocalDOMWindow* window = GetWindow();
   DCHECK(window);
 
-  return AutoplayPolicy::GetAutoplayPolicyForDocument(*window->document());
+  // Force no user gesture required
+  return AutoplayPolicy::Type::kNoUserGestureRequired;
 }
 
 bool AudioContext::AreAutoplayRequirementsFulfilled() const {
