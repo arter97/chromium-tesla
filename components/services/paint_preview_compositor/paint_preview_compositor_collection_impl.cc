@@ -61,17 +61,16 @@ PaintPreviewCompositorCollectionImpl::PaintPreviewCompositorCollectionImpl(
   // Adapted from content::InitializeSkia().
   // TODO(crbug.com/40178027): Tune these limits.
   constexpr int kMB = 1024 * 1024;
-#if BUILDFLAG(IS_ANDROID) || BUILDFLAG(IS_CHROMEOS)
   bool is_low_end_mode =
       base::SysInfo::IsLowEndDeviceOrPartialLowEndModeEnabled(
-          kPartialLowEndModeExcludePaintPreviewCompositor);
+#if BUILDFLAG(IS_ANDROID) || BUILDFLAG(IS_CHROMEOS)
+          kPartialLowEndModeExcludePaintPreviewCompositor
+#endif
+      );
   SkGraphics::SetFontCacheLimit(is_low_end_mode ? kMB : 8 * kMB);
   SkGraphics::SetResourceCacheTotalByteLimit(is_low_end_mode ? 32 * kMB
                                                              : 64 * kMB);
   SkGraphics::SetResourceCacheSingleAllocationByteLimit(16 * kMB);
-#else
-  SkGraphics::SetResourceCacheSingleAllocationByteLimit(64 * kMB);
-#endif  // BUILDFLAG(IS_ANDROID) || BUILDFLAG(IS_CHROMEOS)
 
   if (!initialize_environment_)
     return;
