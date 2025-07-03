@@ -25,7 +25,44 @@
 
 namespace {
 
+uint64_t AmountOfAllowedMemoryCgroupV2() {
+  // Chrome might be running in a cgroup with a memory limit, check it
+  if (!PathExists(base::FilePath("/sys/fs/cgroup/cgroup.controllers")))
+    return 0; // We only support cgroup v2
+
+  std::string cgroup_info;
+  ReadFileToString(base::FilePath("/proc/self/cgroup"), &cgroup_info);
+  if (cgroup_info.empty())
+    return 0;
+
+  std::istringstream iss(cgroup_info);
+  std::string id, controllers, path;
+
+  if (!std::getline(iss, id, ':') ||
+    !std::getline(iss, controllers, ':') ||
+    !std::getline(iss, path))
+      return 0;
+
+  base::FilePath mem_limit_path = base::FilePath("/sys/fs/cgroup/").Append(path).Append("/memory.max");
+  std::string mem_limit_str;
+  ReadFileToString(mem_limit_path, &mem_limit_str);
+  if (mem_limit_str.empty())
+    return 0;
+
+  TrimWhitespaceASCII(mem_limit_str, base::TRIM_ALL, &mem_limit_str);
+
+  uint64_t mem_limit = 0;
+  if (!base::StringToUint64(mem_limit_str, &mem_limit))
+    return 0;
+
+  return mem_limit;
+}
+
 uint64_t AmountOfPhysicalMemory() {
+  uint64_t cgroup_memory_limit = AmountOfAllowedMemoryCgroupV2();
+  if (cgroup_memory_limit > 0)
+    return cgroup_memory_limit;
+
   long pages = sysconf(_SC_PHYS_PAGES);
   long page_size = sysconf(_SC_PAGESIZE);
   if (pages < 0 || page_size < 0)
