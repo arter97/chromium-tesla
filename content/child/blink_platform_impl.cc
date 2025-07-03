@@ -243,6 +243,10 @@ size_t BlinkPlatformImpl::MaxDecodedImageBytes() {
   // common texture size.
   return base::SysInfo::AmountOfPhysicalMemory() / 25;
 #else
+  if (base::SysInfo::IsLowEndDevice()) {
+    // See above.
+    return base::SysInfo::AmountOfPhysicalMemory() / 25;
+  }
   size_t max_decoded_image_byte_limit = kNoDecodedImageByteLimit;
   base::CommandLine& command_line = *base::CommandLine::ForCurrentProcess();
   if (command_line.HasSwitch(switches::kMaxDecodedImageSizeMb)) {
